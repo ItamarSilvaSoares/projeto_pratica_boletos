@@ -3,26 +3,20 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('usuarios', {
-      id_usuario: {
-        allowNull: false,
-        autoIncrement: true,
+    await queryInterface.createTable('status_boleto', {
+      id_status: {
         primaryKey: true,
+        allowNull: false,
         type: Sequelize.INTEGER,
       },
-      nome: {
+      status: {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      sobrenome: {
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
-
     });
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('usuarios');
+    await queryInterface.dropTable('status_boleto');
   },
 };
