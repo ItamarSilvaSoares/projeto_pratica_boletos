@@ -4,8 +4,11 @@
   "description": "",
   "main": "./src/server.js",
   "scripts": {
+    "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate",
     "start": "nodemon .",
     "test": "mocha ./tests/**/*$NAME*.test.js --exit",
+    "drop": "npx sequelize-cli db:drop",
+    "seed": "npx sequelize-cli db:seed:all",
     "debug": "nodemon ./src/server.js",
     "lint": "eslint ."
   },

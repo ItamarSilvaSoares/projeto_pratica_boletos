@@ -7,11 +7,29 @@ module.exports = (sequelize, DataTypes) => {
     },
     nome: DataTypes.STRING,
     sobrenome: DataTypes.STRING,
+    senha: DataTypes.STRING,
   },
   {
-    timesTamps: false,
+    timestamps: false,
     tableName: 'usuarios',
+    underscored: true,
   });
+
+  User.associate = (models) => {
+    User.hasMany(models.Cell, {
+      foreignKey: 'id_usuario',
+      as: 'celulares',
+    });
+    User.hasMany(models.Email, {
+      foreignKey: 'id_usuario',
+      as: 'emails',
+    });
+    User.hasMany(models.Billet, {
+      foreignKey: 'id_usuario',
+      as: 'boletos',
+    });
+  };
+
 
   return User;
 };

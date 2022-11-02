@@ -12,5 +12,7 @@ module.exports = {
   },
   'ignorePatterns': ['**/models/index.js'],
   'rules': {
+    'new-cap': ['error', {'capIsNew': false}],
+
   },
 };

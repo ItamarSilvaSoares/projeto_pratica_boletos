@@ -8,6 +8,7 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
         type: Sequelize.INTEGER,
+        autoIncrement: true,
       },
       descricao: Sequelize.TEXT,
       adicionado_em: {

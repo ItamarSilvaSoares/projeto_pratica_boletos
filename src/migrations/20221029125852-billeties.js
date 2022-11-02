@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
@@ -9,6 +8,7 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
         type: Sequelize.INTEGER,
+        autoIncrement: true,
       },
       vencimento: {
         type: Sequelize.DATE,
@@ -41,6 +41,16 @@ module.exports = {
       valor: {
         allowNull: false,
         type: Sequelize.DECIMAL,
+      },
+      id_usuario: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'usuarios',
+          key: 'id_usuario',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
 
 

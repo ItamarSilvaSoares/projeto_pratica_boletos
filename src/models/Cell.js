@@ -5,12 +5,20 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true,
     },
+    id_usuario: DataTypes.INTEGER,
     celular: DataTypes.STRING,
   },
   {
-    timesTamps: false,
-    tableName: 'celulares',
+    timestamps: false,
+    tableName: 'celular_usuario',
   });
+
+  Cell.associate = (models) => {
+    Cell.hasOne(models.User, {
+      foreignKey: 'id_usuario',
+      as: 'usuario',
+    });
+  };
 
   return Cell;
 };

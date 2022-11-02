@@ -5,12 +5,20 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true,
     },
+    id_usuario: DataTypes.INTEGER,
     email: DataTypes.STRING,
+
   },
   {
-    timesTamps: false,
-    tableName: 'emails',
+    timestamps: false,
+    tableName: 'email_usuario',
   });
 
+  Email.associate = (models) => {
+    Email.hasOne(models.User, {
+      foreignKey: 'id_usuario',
+      as: 'usuario',
+    });
+  };
   return Email;
 };
