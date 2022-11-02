@@ -10,7 +10,7 @@ module.exports = {
     'ecmaVersion': 'latest',
     'sourceType': 'module',
   },
-  'ignorePatterns': ['**/models/index.js'],
+  'ignorePatterns': ['**/models/index.js', 'node_modules'],
   'rules': {
     'new-cap': ['error', {'capIsNew': false}],
 
