@@ -42,9 +42,42 @@ model Email {
 }
 
 model Billet {
-  billetId Int      @id @default(autoincrement()) @map("billet_id")
-  idUser   Int      @map("id_user")
-  validity DateTime
-  value    Decimal
-  user     User     @relation(fields: [idUser], references: [userId], onDelete: Cascade, onUpdate: Cascade)
+  billetId      Int           @id @default(autoincrement()) @map("billet_id")
+  idUser        Int           @map("id_user")
+  idDescription Int           @map("id_description")
+  idStatus      Int           @map("id_status")
+  idLine        Int           @map("id_line")
+  validity      DateTime
+  value         Decimal
+  user          User          @relation(fields: [idUser], references: [userId], onDelete: Cascade, onUpdate: Cascade)
+  desc          Description   @relation(fields: [idDescription], references: [descriptionId], onDelete: Cascade, onUpdate: Cascade)
+  status        Status        @relation(fields: [idStatus], references: [statusId], onDelete: Cascade, onUpdate: Cascade)
+  line          ScannableLine @relation(fields: [idLine], references: [lineId], onDelete: Cascade, onUpdate: Cascade)
+
+  @@map("billets")
+}
+
+model Description {
+  descriptionId Int      @id @default(autoincrement()) @map("description_id")
+  description   String
+  creatAt       DateTime @default(now())
+  bill          Billet[]
+
+  @@map("descriptions")
+}
+
+model Status {
+  statusId Int      @id @default(autoincrement()) @map("status_id")
+  status   String
+  bill     Billet[]
+
+  @@map("status")
+}
+
+model ScannableLine {
+  lineId Int      @id @default(autoincrement()) @map("line_id")
+  line   String
+  bill   Billet[]
+
+  @@map("scannable_lines")
 }
