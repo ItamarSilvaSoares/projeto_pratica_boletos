@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model SequelizeMeta {
+  name String @id @unique(map: "name") @db.VarChar(255)
+}
+
+model boletos {
+  id_boleto          Int                 @id @default(autoincrement())
+  vencimento         DateTime            @db.DateTime(0)
+  id_status          Int                 @default(2)
+  id_descricao       Int?
+  id_linha           Int
+  valor              Decimal             @db.Decimal(10, 0)
+  id_usuario         Int
+  status_boleto      status_boleto       @relation(fields: [id_status], references: [id_status], onDelete: NoAction, onUpdate: NoAction, map: "boletos_ibfk_1")
+  descricoes_boletos descricoes_boletos? @relation(fields: [id_descricao], references: [id_descricao], onDelete: NoAction, onUpdate: NoAction, map: "boletos_ibfk_2")
+  linhas_digitaveis  linhas_digitaveis   @relation(fields: [id_linha], references: [id_linha], onDelete: NoAction, onUpdate: NoAction, map: "boletos_ibfk_3")
+  usuarios           usuarios            @relation(fields: [id_usuario], references: [id_usuario], onDelete: Cascade, map: "boletos_ibfk_4")
+
+  @@index([id_descricao], map: "id_descricao")
+  @@index([id_linha], map: "id_linha")
+  @@index([id_status], map: "id_status")
+  @@index([id_usuario], map: "id_usuario")
+}
+
+model celular_usuario {
+  id_celular Int      @id @default(autoincrement())
+  id_usuario Int
+  celular    String   @db.VarChar(255)
+  usuarios   usuarios @relation(fields: [id_usuario], references: [id_usuario], onDelete: Cascade, map: "celular_usuario_ibfk_1")
+
+  @@index([id_usuario], map: "id_usuario")
+}
+
+model descricoes_boletos {
+  id_descricao  Int       @id @default(autoincrement())
+  descricao     String?   @db.Text
+  adicionado_em DateTime  @db.DateTime(0)
+  boletos       boletos[]
+}
+
+model email_usuario {
+  id_email   Int      @id @default(autoincrement())
+  id_usuario Int
+  email      String   @db.VarChar(255)
+  usuarios   usuarios @relation(fields: [id_usuario], references: [id_usuario], onDelete: Cascade, map: "email_usuario_ibfk_1")
+
+  @@index([id_usuario], map: "id_usuario")
+}
+
+model linhas_digitaveis {
+  id_linha        Int       @id @default(autoincrement())
+  linha_digitavel String    @db.VarChar(255)
+  boletos         boletos[]
+}
+
+model status_boleto {
+  id_status Int       @id @default(autoincrement())
+  status    String    @db.VarChar(255)
+  boletos   boletos[]
+}
+
+model usuarios {
+  id_usuario      Int               @id @default(autoincrement())
+  nome            String            @db.VarChar(255)
+  sobrenome       String            @db.VarChar(255)
+  senha           String            @db.VarChar(255)
+  boletos         boletos[]
+  celular_usuario celular_usuario[]
+  email_usuario   email_usuario[]
+}
