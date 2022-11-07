@@ -10,12 +10,12 @@
   "scripts": {
     "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate",
     "start": "npm run build && node ./dist/index.js",
-    "dev": "tsnd index.ts",
+    "dev": "nodemon --watch \"./src/**\" --ext \"ts,js\" --ignore \"src/**/*.spec.ts,src/**/*.json\" --exec \"ts-node src/index.ts\"",
     "build": "tsc",
     "test": "mocha ./tests/**/*$NAME*.test.js --exit",
     "drop": "npx sequelize-cli db:drop",
     "seed": "npx sequelize-cli db:seed:all",
-    "debug": "nodemon ./src/server.js",
+    "debug": "nodemon ./src/index.js",
     "lint": "eslint ."
   },
   "keywords": [],
