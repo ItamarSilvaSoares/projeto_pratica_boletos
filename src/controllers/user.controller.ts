@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
+
 import UserService from '../services/user.service';
 
-
 export default class UserController {
-  private userService = new UserService()
+  private readonly userService = new UserService();
 
-  getAllUser = async (req: Request, res: Response) => {
-    const result = await this.userService.getAllUsers()
+  getAllUser = async (_req: Request, res: Response): Promise<void> => {
+    const result = await this.userService.getAllUser();
 
-    res.status(200).json(result)
-  }
+    res.status(200).json(result);
+  };
 }

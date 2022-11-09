@@ -1,14 +1,13 @@
-import { User as Users, PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client';
 
-import { IUser } from '../interfaces/IUser'
+import { IUser } from '../interfaces/IUser';
 
 export default class UserModel {
-  constructor(private readonly prismaUser: PrismaClient['user']) { }
+  private readonly user = new PrismaClient();
 
-  private prism = new PrismaClient()
+  getAllUser = async (): Promise<IUser[]> => {
+    const allUser = this.user.user.findMany();
 
-  async getAllUser(): Promise<Users[]> {
-    // return this.prism.user.findMany()
-    return this.prismaUser.findMany()
-  }
-};
+    return await allUser;
+  };
+}

@@ -1,15 +1,12 @@
-import { PrismaClient, User } from '@prisma/client'
-
 import UserModel from '../models/User';
 
+import { IUser } from '../interfaces/IUser';
 
 export default class UserService {
-  private prisma = new PrismaClient()
-  private userModel = new UserModel(this.prisma.user)
-  // private userModel = new UserModel()
+  private readonly userModel = new UserModel();
 
-  getAllUsers = async () => {
-    const result = await this.userModel.getAllUser()
-    return result
-  }
+  getAllUser = async (): Promise<IUser[]> => {
+    const allUser = await this.userModel.getAllUser();
+    return allUser;
+  };
 }
