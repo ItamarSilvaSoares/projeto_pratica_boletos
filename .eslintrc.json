@@ -16,6 +16,7 @@
             "always"
         ],
         "@typescript-eslint/semi": "off",
-        "@typescript-eslint/no-misused-promises": "off"
+        "@typescript-eslint/no-misused-promises": "off",
+        "@typescript-eslint/space-before-function-paren": "off"
     }
 }

@@ -1,6 +1,6 @@
 # Projeto de pratica de backend
 
-objetivo do projeto: construir um backend completo, com teste unitarios e de integração.
+objetivo do projeto: construir um backend completo, com teste unitários e de integração.
 
 <details>
   <summary><strong>🐳 Rodando no Docker vs Localmente</strong></summary>
@@ -55,9 +55,13 @@ renomeia o `.env.exemple` para `.env` e altere as variáveis para seu uso
 - prisma
 </details>
 
-## Nota
+<details>
+<summary><strong>Minhas Notas</strong></summary>
+
 Para funcionar as models com prisma no docker tive que rodar o comando
 ```bash
 docker system prune -af
 ```
-e subir novamente o docker-compose
+e subir novamente o docker-compose, e altera a variável DATABASE_URL para referenciar o nome do container que está roda o banco de dados invés do host.
+
+</details>

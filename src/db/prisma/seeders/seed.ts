@@ -1,25 +1,31 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
-async function main() {
+async function main(): Promise<void> {
   const userOne = await prisma.user.upsert({
     where: { userId: 0 },
     update: {},
     create: {
       name: 'test',
       lastname: 'test',
-      username: 'userOnes',
-      password: '1234',
+      username: 'userOne',
+      password: '12345678',
       cell: {
         create: [{
           cell: '123456789'
         }, {
           cell: '987654321'
         }]
+      },
+      email: {
+        create: {
+          email: 'userOne@test.com'
+        }
       }
     }
-  })
+  });
+
   const userTwo = await prisma.user.upsert({
     where: { userId: 0 },
     update: {},
@@ -27,27 +33,33 @@ async function main() {
       name: 'test2',
       lastname: 'test',
       username: 'userTwo',
-      password: '1234',
+      password: '12345678',
       cell: {
         create: [{
           cell: '123456789'
         }, {
           cell: '987654321'
         }]
+      },
+      email: {
+        create: [{
+          email: 'userTwo@test.com'
+        }, {
+          email: 'twoUser@test.com'
+        }]
       }
     }
-  })
+  });
 
   console.log({ userOne, userTwo });
 }
 
-
 main()
   .then(async () => {
-    await prisma.$disconnect()
+    await prisma.$disconnect();
   })
   .catch(async (e) => {
-    console.error(e)
-    await prisma.$disconnect()
-    process.exit(1)
-  })
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });
