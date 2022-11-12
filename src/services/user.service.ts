@@ -7,7 +7,7 @@ export default class UserService {
   private readonly userModel = new UserModel();
   private readonly useful = new FuncUseful();
 
-  getAllUser = async (): Promise<IUser[]> => {
+  async getAllUser(): Promise<IUser[]> {
     const allUser = await this.userModel.getAllUser();
 
     return this.useful.excludePassword(allUser);

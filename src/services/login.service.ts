@@ -6,7 +6,7 @@ export default class UserLogin {
   private readonly userModel = new UserModel();
   private readonly useful = new FuncUseful();
 
-  login = async (username: string, password: string): Promise<string> => {
+  async login(username: string, password: string): Promise<string> {
     const login = await this.userModel.login(username, password);
 
     if (login === null) throw new HttpException(StatusCodes.Unauthorized, 'Username or password invalid');

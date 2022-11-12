@@ -1,20 +1,18 @@
-import { PrismaClient } from '@prisma/client';
+import prisma from './client';
 
 import { IUser } from '../interfaces/IUser';
 
 export default class UserModel {
-  private readonly prismaDb = new PrismaClient();
-
-  login = async (username: string, password: string): Promise<IUser | null> => {
-    const login = await this.prismaDb.user.findFirst({
+  async login(username: string, password: string): Promise<IUser | null> {
+    const login = await prisma.user.findFirst({
       where: { username, password }
     });
 
     return login;
   };
 
-  getAllUser = async (): Promise<IUser[]> => {
-    const allUser = await this.prismaDb.user.findMany({
+  async getAllUser(): Promise<IUser[]> {
+    const allUser = await prisma.user.findMany({
       include: {
         cell: true,
         email: true
