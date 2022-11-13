@@ -4,3 +4,8 @@ export enum StatusCodes {
   Create = 201,
   BadRequest = 400,
 }
+
+export enum KeyOptional {
+  Cell = 'cell',
+  Email = 'email'
+}

@@ -1,6 +1,6 @@
 import UserModel from '../models/User';
 
-import { IUser } from '../interfaces/IUser';
+import { INewUserFull, IUser } from '../interfaces/IUser';
 import { FuncUseful } from '../utils/functions';
 
 export default class UserService {
@@ -12,4 +12,14 @@ export default class UserService {
 
     return this.useful.excludePassword(allUser);
   };
+
+  async createNewUser(newUserObj: INewUserFull): Promise<IUser> {
+    const newObj = this.useful.configNewUserObject(newUserObj);
+
+    const newUser = await this.userModel.createNewUser(newObj);
+
+    const [newUserNoPassword] = this.useful.excludePassword([newUser]);
+
+    return newUserNoPassword;
+  }
 }

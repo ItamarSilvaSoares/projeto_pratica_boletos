@@ -1,6 +1,7 @@
 import prisma from './client';
 
 import { IUser } from '../interfaces/IUser';
+import { Prisma } from '@prisma/client';
 
 export default class UserModel {
   async login(username: string, password: string): Promise<IUser | null> {
@@ -21,4 +22,12 @@ export default class UserModel {
 
     return allUser;
   };
+
+  async createNewUser(newUserObj: Prisma.UserCreateInput): Promise<IUser> {
+    const newUser = await prisma.user.create({
+      data: newUserObj
+    });
+
+    return newUser;
+  }
 }

@@ -14,4 +14,12 @@ export default class MiddlewareValidations {
 
     next();
   };
+
+  validateBodyNewUser = (req: Request, _res: Response, next: NextFunction): void => {
+    const { error } = this.schemas.newUserSchema.validate(req.body);
+
+    if (error != null) throw new HttpException(StatusCodes.BadRequest, error.message);
+
+    next();
+  };
 }
