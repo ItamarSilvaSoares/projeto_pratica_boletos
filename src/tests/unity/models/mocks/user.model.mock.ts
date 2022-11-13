@@ -65,3 +65,10 @@ export const oneUser = {
   username: 'userOne',
   password: '12345678'
 };
+
+export const calledWithUser = {
+  lastname: 'test',
+  name: 'test1',
+  password: '123456789',
+  username: 'arroz'
+};

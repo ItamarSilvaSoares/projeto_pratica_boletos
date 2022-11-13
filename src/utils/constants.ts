@@ -3,6 +3,7 @@ export enum StatusCodes {
   OK = 200,
   Create = 201,
   BadRequest = 400,
+  Conflict = 409
 }
 
 export enum KeyOptional {

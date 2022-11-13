@@ -1,7 +1,8 @@
 import UserModel from '../models/User';
 
 import { INewUserFull, IUser } from '../interfaces/IUser';
-import { FuncUseful } from '../utils/functions';
+import { FuncUseful, HttpException } from '../utils/functions';
+import { StatusCodes } from '../utils/constants';
 
 export default class UserService {
   private readonly userModel = new UserModel();
@@ -14,6 +15,10 @@ export default class UserService {
   };
 
   async createNewUser(newUserObj: INewUserFull): Promise<IUser> {
+    const user = await this.userModel.getUserByUsername(newUserObj.newUser.username);
+
+    if (user !== null) throw new HttpException(StatusCodes.Conflict, 'username already exists');
+
     const newObj = this.useful.configNewUserObject(newUserObj);
 
     const newUser = await this.userModel.createNewUser(newObj);

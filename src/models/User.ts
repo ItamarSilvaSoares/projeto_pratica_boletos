@@ -12,6 +12,12 @@ export default class UserModel {
     return login;
   };
 
+  async getUserByUsername(username: string): Promise<IUser | null> {
+    const user = await prisma.user.findUnique({ where: { username } });
+
+    return user;
+  }
+
   async getAllUser(): Promise<IUser[]> {
     const allUser = await prisma.user.findMany({
       include: {
