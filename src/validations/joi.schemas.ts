@@ -22,4 +22,11 @@ export default class JoiSchemas {
       cell: Joi.string().min(11).required()
     }).optional()
   });
+
+  newCellSchema = Joi.object({
+    cell: Joi.object({
+      cell: Joi.string().min(11).required()
+    }).required(),
+    user: Joi.object().optional()
+  });
 }

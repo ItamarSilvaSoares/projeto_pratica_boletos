@@ -3,7 +3,7 @@ import { allUserMock, calledWithUser, oneUser } from './mocks/user.model.mock';
 import { prismaMock } from './mocks/singleton';
 
 describe('test the layer user model', function () {
-  const testUserModel = new UserModel();
+  const testUserModel = UserModel;
 
   it('deve retornar todos os usuarios cadastrados corretamente', async function () {
     prismaMock.user.findMany.mockResolvedValue(allUserMock);

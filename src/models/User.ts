@@ -1,9 +1,25 @@
 import prisma from './client';
 
-import { IUser } from '../interfaces/IUser';
+import { INewUserUpdate, IUser } from '../interfaces/IUser';
 import { Prisma } from '@prisma/client';
+import { IModelUser } from '../interfaces/models/IModelUser';
 
-export default class UserModel {
+class UserModel implements IModelUser {
+  async removeUser(username: string): Promise<void> {
+    await prisma.user.delete({ where: { username } });
+  };
+
+  async updateUser(username: string, newData: INewUserUpdate): Promise<IUser> {
+    const result = await prisma.user.update({
+      where: { username },
+      data: {
+        ...newData
+      }
+    });
+
+    return result;
+  };
+
   async login(username: string, password: string): Promise<IUser | null> {
     const login = await prisma.user.findFirst({
       where: { username, password }
@@ -37,3 +53,5 @@ export default class UserModel {
     return newUser;
   }
 }
+
+export default new UserModel();

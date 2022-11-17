@@ -1,11 +1,11 @@
 import UserModel from '../../../models/User';
 import UserLogin from '../../../services/login.service';
 
-import { FuncUseful } from '../../../utils/functions';
+import { Jwt } from '../../../utils/functions';
 
 import { oneUser, oneUserNoPassword } from './mocks/login.service.mock';
 
-const mockUserLogin = new UserLogin();
+const mockUserLogin = new UserLogin(UserModel);
 
 describe('test the layer login', function () {
   afterEach(() => {
@@ -13,7 +13,7 @@ describe('test the layer login', function () {
   });
 
   it('deve retorna uma erro quando o usuario é invalido', async function () {
-    jest.spyOn(UserModel.prototype, 'login').mockResolvedValue(null);
+    jest.spyOn(UserModel, 'login').mockResolvedValue(null);
     try {
       await mockUserLogin.login('não', 'não');
     } catch (error: any) {
@@ -23,8 +23,8 @@ describe('test the layer login', function () {
   });
 
   it('deve retorna um token quando o usuario esta correto', async function () {
-    jest.spyOn(UserModel.prototype, 'login').mockResolvedValue(oneUser);
-    const newToken = new FuncUseful();
+    jest.spyOn(UserModel, 'login').mockResolvedValue(oneUser);
+    const newToken = new Jwt();
 
     const token = newToken.generateToken(oneUserNoPassword);
 

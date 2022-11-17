@@ -1,11 +1,12 @@
 import UserService from '../../../services/user.service';
 import UserController from '../../../controllers/user.controller';
 import { createRequest, createResponse } from 'node-mocks-http';
+import UserModel from '../../../models/User';
 
 import { allUserMockNoPassword } from './mocks/user.controller.mock';
 import { newUser, resultExpectCreateNewUser } from '../services/mocks/user.service.mock';
 
-const mockUserController = new UserController();
+const mockUserController = new UserController(new UserService(UserModel));
 
 describe('test the layer user controller', function () {
   afterEach(() => {

@@ -11,16 +11,16 @@ import {
 } from './mocks/user.service.mock';
 import { prismaMock } from '../models/mocks/singleton';
 
-const mockUserService = new UserService();
+const mockUserService = new UserService(UserModel);
 
 describe('test the layer user service', function () {
-  const mockUserModel = new UserModel();
+  const mockUserModel = UserModel;
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   it('O método getAllUser deve retornar todos os usuario sem o campo password ', async function () {
-    jest.spyOn(UserModel.prototype, 'getAllUser').mockResolvedValue(allUserMock);
+    jest.spyOn(UserModel, 'getAllUser').mockResolvedValue(allUserMock);
 
     const result = await mockUserService.getAllUser();
 
@@ -40,7 +40,7 @@ describe('test the layer user service', function () {
 
   it('O método createNewUser deve um novo usuario cadastrado com sucesso, passando como para parâmetro o usuario, email e cell', async function () {
     prismaMock.user.findUnique.mockResolvedValue(null);
-    jest.spyOn(UserModel.prototype, 'createNewUser').mockResolvedValue(resultCreateNewUser);
+    jest.spyOn(UserModel, 'createNewUser').mockResolvedValue(resultCreateNewUser);
 
     const result = await mockUserService.createNewUser(newUserWithEmailCell);
 
@@ -50,7 +50,7 @@ describe('test the layer user service', function () {
 
   it('O método createNewUser deve um novo usuario cadastrado com sucesso, passando como para parâmetro o usuario e email ', async function () {
     prismaMock.user.findUnique.mockResolvedValue(null);
-    jest.spyOn(UserModel.prototype, 'createNewUser').mockResolvedValue(resultCreateNewUser);
+    jest.spyOn(UserModel, 'createNewUser').mockResolvedValue(resultCreateNewUser);
 
     const result = await mockUserService.createNewUser(newUserWithEmail);
 
@@ -60,7 +60,7 @@ describe('test the layer user service', function () {
 
   it('O método createNewUser deve um novo usuario cadastrado com sucesso, passando como para parâmetro o usuario e cell ', async function () {
     prismaMock.user.findUnique.mockResolvedValue(null);
-    jest.spyOn(UserModel.prototype, 'createNewUser').mockResolvedValue(resultCreateNewUser);
+    jest.spyOn(UserModel, 'createNewUser').mockResolvedValue(resultCreateNewUser);
 
     const result = await mockUserService.createNewUser(newUserWithCell);
 
@@ -70,7 +70,7 @@ describe('test the layer user service', function () {
 
   it('O método createNewUser deve um novo usuario cadastrado com sucesso, passando como para parâmetro somente o usuario ', async function () {
     prismaMock.user.findUnique.mockResolvedValue(null);
-    jest.spyOn(UserModel.prototype, 'createNewUser').mockResolvedValue(resultCreateNewUser);
+    jest.spyOn(UserModel, 'createNewUser').mockResolvedValue(resultCreateNewUser);
 
     const result = await mockUserService.createNewUser(newUser);
 

@@ -16,8 +16,22 @@ export interface INewUser {
   password: string
 }
 
+export interface INewUserUpdate {
+  name?: string
+  lastname?: string
+  username?: string
+  password?: string
+}
+
 export interface INewUserFull {
   newUser: INewUser
   cell?: ICell
   email?: IEmail
+}
+
+export interface IJwtUser {
+  userId: number
+  name: string
+  lastname: string
+  username: string
 }

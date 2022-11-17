@@ -1,10 +1,14 @@
 import { Request, Response } from 'express';
+import { IServiceLogin } from '../interfaces/services/IServiceLogin';
 
-import UserLogin from '../services/login.service';
 import { StatusCodes } from '../utils/constants';
 
 export default class UserLoginController {
-  private readonly loginService = new UserLogin();
+  private readonly loginService: IServiceLogin;
+
+  constructor(loginService: IServiceLogin) {
+    this.loginService = loginService;
+  }
 
   login = async (req: Request, res: Response): Promise<void> => {
     const { username, password } = req.body;
