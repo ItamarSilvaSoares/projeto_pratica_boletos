@@ -3,10 +3,13 @@ export enum StatusCodes {
   OK = 200,
   Create = 201,
   BadRequest = 400,
-  Conflict = 409
+  Conflict = 409,
+  NoContent = 204,
+  NotFound = 404
 }
 
 export enum KeyOptional {
   Cell = 'cell',
-  Email = 'email'
+  Email = 'email',
+  Username = 'username'
 }

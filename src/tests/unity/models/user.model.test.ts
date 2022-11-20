@@ -8,7 +8,7 @@ describe('test the layer user model', function () {
   it('deve retornar todos os usuarios cadastrados corretamente', async function () {
     prismaMock.user.findMany.mockResolvedValue(allUserMock);
 
-    const result = await testUserModel.getAllUser();
+    const result = await testUserModel.find();
 
     expect(result).toEqual(allUserMock);
   });
@@ -24,7 +24,7 @@ describe('test the layer user model', function () {
   it('deve retornado um usuario quando pesquisado por um username valido ', async function () {
     prismaMock.user.findUnique.mockResolvedValue(oneUser);
 
-    const result = await testUserModel.getUserByUsername('userOne');
+    const result = await testUserModel.findOne('userOne');
 
     expect(result).toEqual(oneUser);
   });
@@ -32,7 +32,7 @@ describe('test the layer user model', function () {
   it('deve retornado o novo usuario cadastrado quando se criar um ', async function () {
     prismaMock.user.create.mockResolvedValue(oneUser);
 
-    const result = await testUserModel.createNewUser(calledWithUser);
+    const result = await testUserModel.create(calledWithUser);
 
     expect(result).toEqual(oneUser);
     expect(prismaMock.user.create).toBeCalled();

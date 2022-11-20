@@ -1,5 +1,5 @@
-import { ICell } from './ICell';
-import { IEmail } from './IEmail';
+import { ICellBodyReq } from '../../ICell';
+import { IEmail } from '../../IEmail';
 
 export interface IUser {
   user_id?: number
@@ -16,7 +16,7 @@ export interface INewUser {
   password: string
 }
 
-export interface INewUserUpdate {
+export interface IUserUpdate {
   name?: string
   lastname?: string
   username?: string
@@ -25,7 +25,7 @@ export interface INewUserUpdate {
 
 export interface INewUserFull {
   newUser: INewUser
-  cell?: ICell
+  cell?: ICellBodyReq
   email?: IEmail
 }
 

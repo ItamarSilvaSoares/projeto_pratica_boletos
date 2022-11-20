@@ -1,7 +1,6 @@
 import UserModel from '../../../models/User';
 import UserLogin from '../../../services/login.service';
-
-import { Jwt } from '../../../utils/functions';
+import { Jwt } from '../../../utils/jwt';
 
 import { oneUser, oneUserNoPassword } from './mocks/login.service.mock';
 

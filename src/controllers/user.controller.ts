@@ -21,4 +21,34 @@ export default class UserController {
 
     res.status(StatusCodes.Create).json(result);
   };
+
+  findOne = async (req: Request, res: Response): Promise<void> => {
+    const { username } = req.params;
+
+    const result = await this.userService.findOne(username);
+
+    res.status(StatusCodes.OK).json(result);
+  };
+
+  search = async (req: Request, res: Response): Promise<void> => {
+    const { q } = req.query;
+    const result = await this.userService.search(q as string);
+
+    res.status(StatusCodes.OK).json(result);
+  };
+
+  delete = async (req: Request, res: Response): Promise<void> => {
+    const { username } = req.body.user;
+    await this.userService.delete(username);
+
+    res.status(StatusCodes.OK).json({ message: 'user deleted!' });
+  };
+
+  update = async (req: Request, res: Response): Promise<void> => {
+    const { userUpdate, user: { username } } = req.body;
+
+    const result = await this.userService.update(username, userUpdate);
+
+    res.status(StatusCodes.OK).json(result);
+  };
 }

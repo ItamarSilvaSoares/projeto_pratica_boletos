@@ -1,7 +1,7 @@
 import { ICellDbReturn, ICellUser } from '../interfaces/ICell';
-import { IModelCell } from '../interfaces/models/IModelCell';
+import { IModelCell } from '../interfaces/models/cell/IModelCell';
 import { IServiceCell } from '../interfaces/services/IServiceCell';
-import { IJwtUser } from '../interfaces/IUser';
+import { IJwtUser } from '../interfaces/models/user/IUser';
 
 export default class CellService implements IServiceCell {
   private readonly cellModel: IModelCell;
@@ -11,11 +11,11 @@ export default class CellService implements IServiceCell {
   }
 
   async newCell({ cell: { cell }, user }: ICellUser): Promise<void> {
-    await this.cellModel.associateNewCellToUser(cell, user.userId);
+    await this.cellModel.create(cell, user.userId);
   }
 
   async getAllCellByUserId(user: IJwtUser): Promise<ICellDbReturn[]> {
-    const result = await this.cellModel.getAllCellByUserId(user.userId);
+    const result = await this.cellModel.find(user.userId);
     return result;
   }
 }

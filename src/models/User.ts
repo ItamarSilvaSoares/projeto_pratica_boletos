@@ -1,15 +1,42 @@
 import prisma from './client';
 
-import { INewUserUpdate, IUser } from '../interfaces/IUser';
+import { IUserUpdate, IUser } from '../interfaces/models/user/IUser';
 import { Prisma } from '@prisma/client';
 import { IModelUser } from '../interfaces/models/IModelUser';
 
 class UserModel implements IModelUser {
-  async removeUser(username: string): Promise<void> {
+  async delete(username: string): Promise<void> {
     await prisma.user.delete({ where: { username } });
   };
 
-  async updateUser(username: string, newData: INewUserUpdate): Promise<IUser> {
+  async search(toSearch: string): Promise<IUser[]> {
+    const search = await prisma.user.findMany({
+      where: {
+        OR: [
+          {
+            username: {
+              contains: toSearch
+            }
+          },
+          {
+            name: {
+              contains: toSearch
+            }
+          },
+          {
+            lastname: {
+              contains: toSearch
+            }
+          }
+
+        ]
+      }
+    });
+
+    return search;
+  };
+
+  async update(username: string, newData: IUserUpdate): Promise<IUser> {
     const result = await prisma.user.update({
       where: { username },
       data: {
@@ -28,13 +55,13 @@ class UserModel implements IModelUser {
     return login;
   };
 
-  async getUserByUsername(username: string): Promise<IUser | null> {
+  async findOne(username: string): Promise<IUser | null> {
     const user = await prisma.user.findUnique({ where: { username } });
 
     return user;
   }
 
-  async getAllUser(): Promise<IUser[]> {
+  async find(): Promise<IUser[]> {
     const allUser = await prisma.user.findMany({
       include: {
         cell: true,
@@ -45,7 +72,7 @@ class UserModel implements IModelUser {
     return allUser;
   };
 
-  async createNewUser(newUserObj: Prisma.UserCreateInput): Promise<IUser> {
+  async create(newUserObj: Prisma.UserCreateInput): Promise<IUser> {
     const newUser = await prisma.user.create({
       data: newUserObj
     });

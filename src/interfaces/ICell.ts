@@ -1,11 +1,11 @@
-import { IJwtUser } from './IUser';
+import { IJwtUser } from './models/user/IUser';
 
-export interface ICell {
+export interface ICellBodyReq {
   cell: string
 }
 
 export interface ICellUser {
-  cell: ICell
+  cell: ICellBodyReq
   user: IJwtUser
 }
 

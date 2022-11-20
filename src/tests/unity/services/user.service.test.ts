@@ -20,7 +20,7 @@ describe('test the layer user service', function () {
   });
 
   it('O método getAllUser deve retornar todos os usuario sem o campo password ', async function () {
-    jest.spyOn(UserModel, 'getAllUser').mockResolvedValue(allUserMock);
+    jest.spyOn(UserModel, 'find').mockResolvedValue(allUserMock);
 
     const result = await mockUserService.getAllUser();
 
@@ -40,41 +40,41 @@ describe('test the layer user service', function () {
 
   it('O método createNewUser deve um novo usuario cadastrado com sucesso, passando como para parâmetro o usuario, email e cell', async function () {
     prismaMock.user.findUnique.mockResolvedValue(null);
-    jest.spyOn(UserModel, 'createNewUser').mockResolvedValue(resultCreateNewUser);
+    jest.spyOn(UserModel, 'create').mockResolvedValue(resultCreateNewUser);
 
     const result = await mockUserService.createNewUser(newUserWithEmailCell);
 
     expect(result).toEqual(resultExpectCreateNewUser);
-    expect(mockUserModel.createNewUser).toBeCalledWith(calledWithFull);
+    expect(mockUserModel.create).toBeCalledWith(calledWithFull);
   });
 
   it('O método createNewUser deve um novo usuario cadastrado com sucesso, passando como para parâmetro o usuario e email ', async function () {
     prismaMock.user.findUnique.mockResolvedValue(null);
-    jest.spyOn(UserModel, 'createNewUser').mockResolvedValue(resultCreateNewUser);
+    jest.spyOn(UserModel, 'create').mockResolvedValue(resultCreateNewUser);
 
     const result = await mockUserService.createNewUser(newUserWithEmail);
 
     expect(result).toEqual(resultExpectCreateNewUser);
-    expect(mockUserModel.createNewUser).toBeCalledWith(calledWithEmail);
+    expect(mockUserModel.create).toBeCalledWith(calledWithEmail);
   });
 
   it('O método createNewUser deve um novo usuario cadastrado com sucesso, passando como para parâmetro o usuario e cell ', async function () {
     prismaMock.user.findUnique.mockResolvedValue(null);
-    jest.spyOn(UserModel, 'createNewUser').mockResolvedValue(resultCreateNewUser);
+    jest.spyOn(UserModel, 'create').mockResolvedValue(resultCreateNewUser);
 
     const result = await mockUserService.createNewUser(newUserWithCell);
 
     expect(result).toEqual(resultExpectCreateNewUser);
-    expect(mockUserModel.createNewUser).toBeCalledWith(calledWithCell);
+    expect(mockUserModel.create).toBeCalledWith(calledWithCell);
   });
 
   it('O método createNewUser deve um novo usuario cadastrado com sucesso, passando como para parâmetro somente o usuario ', async function () {
     prismaMock.user.findUnique.mockResolvedValue(null);
-    jest.spyOn(UserModel, 'createNewUser').mockResolvedValue(resultCreateNewUser);
+    jest.spyOn(UserModel, 'create').mockResolvedValue(resultCreateNewUser);
 
     const result = await mockUserService.createNewUser(newUser);
 
     expect(result).toEqual(resultExpectCreateNewUser);
-    expect(mockUserModel.createNewUser).toBeCalledWith(calledWithUser);
+    expect(mockUserModel.create).toBeCalledWith(calledWithUser);
   });
 });

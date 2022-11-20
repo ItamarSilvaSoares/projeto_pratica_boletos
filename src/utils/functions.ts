@@ -1,32 +1,11 @@
 import { Prisma } from '@prisma/client';
-import jwt from 'jsonwebtoken';
+
 import dotenv from 'dotenv';
 
-import { INewUserFull, IUser } from '../interfaces/IUser';
-import { KeyOptional, StatusCodes } from './constants';
+import { INewUserFull, IUser } from '../interfaces/models/user/IUser';
+import { KeyOptional } from './constants';
 
 dotenv.config();
-
-export class Jwt {
-  generateToken = (user: IUser): string => {
-    const token = jwt.sign(
-      user,
-      process.env.JWT_SECRET as string,
-      { algorithm: 'HS256', expiresIn: '1d' }
-    );
-    return token;
-  };
-
-  validateToken = (token: string): jwt.JwtPayload | string => {
-    try {
-      const data = jwt.verify(token, process.env.JWT_SECRET as jwt.Secret);
-
-      return data;
-    } catch (error) {
-      throw new HttpException(StatusCodes.Unauthorized, 'invalid token');
-    }
-  };
-}
 
 export class FuncUseful {
   excludePassword(users: IUser[]): IUser[] {
@@ -70,14 +49,5 @@ export class FuncUseful {
     }
 
     return newUserObj.newUser;
-  }
-}
-
-export class HttpException extends Error {
-  status: number; // propriedade
-
-  constructor(status: number, message: string) {
-    super(message);
-    this.status = status;
   }
 }

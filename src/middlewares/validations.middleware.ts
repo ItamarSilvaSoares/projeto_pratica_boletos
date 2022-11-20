@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from '../utils/constants';
-import { HttpException, Jwt } from '../utils/functions';
+import { HttpException } from '../utils/httpException';
+import { Jwt } from '../utils/jwt';
 
 import JoiSchemas from '../validations/joi.schemas';
 
@@ -15,7 +16,7 @@ export default class MiddlewareValidations {
     next();
   };
 
-  validateBodyNewUser = (req: Request, _res: Response, next: NextFunction): void => {
+  validateBodyNewUser: any = (req: Request, _res: Response, next: NextFunction): void => {
     const { error } = this.schemas.newUserSchema.validate(req.body);
 
     if (error != null) throw new HttpException(StatusCodes.BadRequest, error.message);
@@ -37,6 +38,14 @@ export default class MiddlewareValidations {
     const data = jwt.validateToken(req.headers.authorization as string);
 
     req.body.user = data;
+
+    next();
+  };
+
+  validateBodyUserUpdate = (req: Request, _res: Response, next: NextFunction): void => {
+    const { error } = this.schemas.userUpdateSchema.validate(req.body);
+
+    if (error != null) throw new HttpException(StatusCodes.BadRequest, error.message);
 
     next();
   };

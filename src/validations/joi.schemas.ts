@@ -27,6 +27,18 @@ export default class JoiSchemas {
     cell: Joi.object({
       cell: Joi.string().min(11).required()
     }).required(),
+
+    user: Joi.object().optional()
+  });
+
+  userUpdateSchema = Joi.object({
+    userUpdate: Joi.object({
+      name: Joi.string().min(5).optional(),
+      lastname: Joi.string().min(5).optional(),
+      username: Joi.string().min(3).optional(),
+      password: Joi.string().min(8).optional()
+    }).required(),
+
     user: Joi.object().optional()
   });
 }

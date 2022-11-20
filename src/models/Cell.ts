@@ -1,17 +1,20 @@
 import { ICellDbReturn } from '../interfaces/ICell';
-import { IModelCell } from '../interfaces/models/IModelCell';
+import { IModelCell } from '../interfaces/models/cell/IModelCell';
 import prisma from './client';
 
-// import { ICell } from '../interfaces/ICell';
-
 class CellModel implements IModelCell {
-  async deleteCell(cellId: number): Promise<void> {
+  async update(cellId: number, cell: string): Promise<ICellDbReturn> {
+    const result = await prisma.cell.update({ where: { cellId }, data: { cell } });
+    return result;
+  };
+
+  async delete(cellId: number): Promise<void> {
     await prisma.cell.delete({
       where: { cellId }
     });
   };
 
-  async associateNewCellToUser(cell: string, idUser: number): Promise<void> {
+  async create(cell: string, idUser: number): Promise<void> {
     await prisma.cell.create({
       data: {
         cell,
@@ -20,7 +23,7 @@ class CellModel implements IModelCell {
     });
   };
 
-  async getAllCellByUserId(idUser: number): Promise<ICellDbReturn[]> {
+  async find(idUser: number): Promise<ICellDbReturn[]> {
     const result = await prisma.cell.findMany({ where: { idUser } });
     return result;
   }

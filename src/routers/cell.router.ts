@@ -11,10 +11,10 @@ const validate = new MiddlewareValidations();
 
 const router = express.Router();
 
-router.post('/', validate.tokenValidate, validate.validateBodyNewCell,
-  async (req, res) => await cellController.newCell(req, res));
+router.use(validate.tokenValidate);
 
-router.get('/', validate.tokenValidate,
-  async (req, res) => await cellController.getAllCellById(req, res));
+router.post('/', validate.validateBodyNewCell, async (req, res) => await cellController.newCell(req, res));
+
+router.get('/', async (req, res) => await cellController.getAllCellById(req, res));
 
 export default router;

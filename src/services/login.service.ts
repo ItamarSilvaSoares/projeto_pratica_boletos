@@ -1,7 +1,9 @@
 import { IModelUser } from '../interfaces/models/IModelUser';
 import { IServiceLogin } from '../interfaces/services/IServiceLogin';
 import { StatusCodes } from '../utils/constants';
-import { FuncUseful, HttpException, Jwt } from '../utils/functions';
+import { FuncUseful } from '../utils/functions';
+import { HttpException } from '../utils/httpException';
+import { Jwt } from '../utils/jwt';
 
 export default class UserLogin implements IServiceLogin {
   private readonly useful = new FuncUseful();
