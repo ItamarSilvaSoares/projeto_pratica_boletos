@@ -17,7 +17,10 @@ export default class UserLogin implements IServiceLogin {
   async login(username: string, password: string): Promise<string> {
     const login = await this.userModel.login(username, password);
 
-    if (login === null) throw new HttpException(StatusCodes.Unauthorized, 'Username or password invalid');
+    if (login === null) {
+      throw new HttpException(StatusCodes.Unauthorized,
+        'Username or password invalid');
+    }
 
     const [withoutPassword] = this.useful.excludePassword([login]);
 

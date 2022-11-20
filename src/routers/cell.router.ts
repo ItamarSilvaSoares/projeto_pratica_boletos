@@ -13,8 +13,10 @@ const router = express.Router();
 
 router.use(validate.tokenValidate);
 
-router.post('/', validate.validateBodyNewCell, async (req, res) => await cellController.newCell(req, res));
+router.post('/', validate.validateBodyNewCell,
+  async (req, res) => await cellController.newCell(req, res));
 
-router.get('/', async (req, res) => await cellController.getAllCellById(req, res));
+router.get('/',
+  async (req, res) => await cellController.getAllCellById(req, res));
 
 export default router;

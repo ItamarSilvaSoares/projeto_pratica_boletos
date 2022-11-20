@@ -13,22 +13,9 @@ class UserModel implements IModelUser {
     const search = await prisma.user.findMany({
       where: {
         OR: [
-          {
-            username: {
-              contains: toSearch
-            }
-          },
-          {
-            name: {
-              contains: toSearch
-            }
-          },
-          {
-            lastname: {
-              contains: toSearch
-            }
-          }
-
+          { username: { contains: toSearch } },
+          { name: { contains: toSearch } },
+          { lastname: { contains: toSearch } }
         ]
       }
     });
@@ -39,9 +26,7 @@ class UserModel implements IModelUser {
   async update(username: string, newData: IUserUpdate): Promise<IUser> {
     const result = await prisma.user.update({
       where: { username },
-      data: {
-        ...newData
-      }
+      data: { ...newData }
     });
 
     return result;
@@ -63,19 +48,14 @@ class UserModel implements IModelUser {
 
   async find(): Promise<IUser[]> {
     const allUser = await prisma.user.findMany({
-      include: {
-        cell: true,
-        email: true
-      }
+      include: { cell: true, email: true }
     });
 
     return allUser;
   };
 
   async create(newUserObj: Prisma.UserCreateInput): Promise<IUser> {
-    const newUser = await prisma.user.create({
-      data: newUserObj
-    });
+    const newUser = await prisma.user.create({ data: newUserObj });
 
     return newUser;
   }

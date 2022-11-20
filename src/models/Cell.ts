@@ -4,7 +4,9 @@ import prisma from './client';
 
 class CellModel implements IModelCell {
   async update(cellId: number, cell: string): Promise<ICellDbReturn> {
-    const result = await prisma.cell.update({ where: { cellId }, data: { cell } });
+    const result = await prisma.cell.update({
+      where: { cellId }, data: { cell }
+    });
     return result;
   };
 

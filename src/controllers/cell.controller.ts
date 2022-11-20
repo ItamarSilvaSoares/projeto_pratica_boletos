@@ -13,7 +13,8 @@ export default class CellController {
   newCell = async (req: Request, res: Response): Promise<void> => {
     await this.cellService.newCell(req.body);
 
-    res.status(StatusCodes.Create).json({ message: 'new cell add with success' });
+    res.status(StatusCodes.Create)
+      .json({ message: 'new cell add with success' });
   };
 
   getAllCellById = async (req: Request, res: Response): Promise<void> => {

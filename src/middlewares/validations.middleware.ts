@@ -8,26 +8,38 @@ import JoiSchemas from '../validations/joi.schemas';
 export default class MiddlewareValidations {
   private readonly schemas = new JoiSchemas();
 
-  validateBodyLogin = (req: Request, _res: Response, next: NextFunction): void => {
+  validateBodyLogin = (req: Request, _res: Response,
+    next: NextFunction): void => {
     const { error } = this.schemas.loginSchema.validate(req.body);
 
-    if (error != null) throw new HttpException(StatusCodes.BadRequest, error.message);
+    if (error != null) {
+      throw new HttpException(StatusCodes.BadRequest,
+        error.message);
+    }
 
     next();
   };
 
-  validateBodyNewUser: any = (req: Request, _res: Response, next: NextFunction): void => {
+  validateBodyNewUser: any = (req: Request, _res: Response,
+    next: NextFunction): void => {
     const { error } = this.schemas.newUserSchema.validate(req.body);
 
-    if (error != null) throw new HttpException(StatusCodes.BadRequest, error.message);
+    if (error != null) {
+      throw new HttpException(StatusCodes.BadRequest,
+        error.message);
+    }
 
     next();
   };
 
-  validateBodyNewCell = (req: Request, _res: Response, next: NextFunction): void => {
+  validateBodyNewCell = (req: Request, _res: Response,
+    next: NextFunction): void => {
     const { error } = this.schemas.newCellSchema.validate(req.body);
 
-    if (error != null) throw new HttpException(StatusCodes.BadRequest, error.message);
+    if (error != null) {
+      throw new HttpException(StatusCodes.BadRequest,
+        error.message);
+    }
 
     next();
   };
@@ -42,10 +54,14 @@ export default class MiddlewareValidations {
     next();
   };
 
-  validateBodyUserUpdate = (req: Request, _res: Response, next: NextFunction): void => {
+  validateBodyUserUpdate = (req: Request, _res: Response,
+    next: NextFunction): void => {
     const { error } = this.schemas.userUpdateSchema.validate(req.body);
 
-    if (error != null) throw new HttpException(StatusCodes.BadRequest, error.message);
+    if (error != null) {
+      throw new HttpException(StatusCodes.BadRequest,
+        error.message);
+    }
 
     next();
   };

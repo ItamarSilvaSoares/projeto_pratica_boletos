@@ -17,6 +17,55 @@
         ],
         "@typescript-eslint/semi": "off",
         "@typescript-eslint/no-misused-promises": "off",
-        "@typescript-eslint/space-before-function-paren": "off"
+        "@typescript-eslint/space-before-function-paren": "off",
+        "max-len": [
+            "error",
+            {
+                "code": 100
+            },
+            {
+                "ignoreComments": true
+            }
+        ],
+        "complexity": [
+            "error",
+            5
+        ],
+        "quotes": [
+            2,
+            "single"
+        ],
+        "max-params": [
+            "error",
+            4
+        ],
+        "max-lines": [
+            "error",
+            250
+        ],
+        "max-lines-per-function": [
+            "error",
+            {
+                "max": 20,
+                "skipBlankLines": true,
+                "skipComments": true
+            }
+        ],
+        "lines-between-class-members": [
+            "error",
+            "always",
+            {
+                "exceptAfterSingleLine": true
+            }
+        ],
+        "@typescript-eslint/lines-between-class-members": [
+            "error",
+            "always",
+            {
+                "exceptAfterSingleLine": true
+            }
+        ],
+        "no-console": "off",
+        "camelcase": "warn"
     }
 }

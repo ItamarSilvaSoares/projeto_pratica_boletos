@@ -19,33 +19,19 @@ export class FuncUseful {
       const { newUser, cell, email } = newUserObj;
       return {
         ...newUser,
-        cell: {
-          create: cell
-        },
-        email: {
-          create: email
-        }
+        cell: { create: cell },
+        email: { create: email }
       };
     }
 
     if (KeyOptional.Cell in newUserObj) {
       const { newUser, cell } = newUserObj;
-      return {
-        ...newUser,
-        cell: {
-          create: cell
-        }
-      };
+      return { ...newUser, cell: { create: cell } };
     }
 
     if (KeyOptional.Email in newUserObj) {
       const { newUser, email } = newUserObj;
-      return {
-        ...newUser,
-        email: {
-          create: email
-        }
-      };
+      return { ...newUser, email: { create: email } };
     }
 
     return newUserObj.newUser;

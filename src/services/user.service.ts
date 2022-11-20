@@ -1,4 +1,6 @@
-import { INewUserFull, IUser, IUserUpdate } from '../interfaces/models/user/IUser';
+import {
+  INewUserFull, IUser, IUserUpdate
+} from '../interfaces/models/user/IUser';
 import { FuncUseful } from '../utils/functions';
 import { KeyOptional, StatusCodes } from '../utils/constants';
 import { IModelUser } from '../interfaces/models/IModelUser';
@@ -24,7 +26,9 @@ export default class UserService implements IServiceUser {
   async findOne(username: string): Promise<IUser> {
     const user = await this.userModel.findOne(username);
 
-    if (user === null) throw new HttpException(StatusCodes.NotFound, 'User not found');
+    if (user === null) {
+      throw new HttpException(StatusCodes.NotFound, 'User not found');
+    }
 
     const [newUserNoPassword] = this.useful.excludePassword([user]);
 
@@ -39,7 +43,10 @@ export default class UserService implements IServiceUser {
     if (KeyOptional.Username in newData) {
       const user = await this.userModel.findOne(newData.username as string);
 
-      if (user !== null) throw new HttpException(StatusCodes.Conflict, 'username already exists');
+      if (user !== null) {
+        throw new HttpException(StatusCodes.Conflict,
+          'username already exists');
+      }
     }
 
     const user = await this.userModel.update(username, newData);
@@ -58,7 +65,9 @@ export default class UserService implements IServiceUser {
   async createNewUser(newUserObj: INewUserFull): Promise<IUser> {
     const user = await this.userModel.findOne(newUserObj.newUser.username);
 
-    if (user !== null) throw new HttpException(StatusCodes.Conflict, 'username already exists');
+    if (user !== null) {
+      throw new HttpException(StatusCodes.Conflict, 'username already exists');
+    }
 
     const newObj = this.useful.configNewUserObject(newUserObj);
 
