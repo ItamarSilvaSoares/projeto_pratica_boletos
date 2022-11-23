@@ -1,6 +1,6 @@
 # Projeto de pratica de backend
 
-objetivo do projeto: construir um backend completo, com teste unitarios e de integração.
+objetivo do projeto: construir um backend completo, com teste unitários e de integração.
 
 <details>
   <summary><strong>🐳 Rodando no Docker vs Localmente</strong></summary>
@@ -9,7 +9,7 @@ objetivo do projeto: construir um backend completo, com teste unitarios e de int
 
 **:warning: Antes de começar, seu docker-compose precisa estar na versão 1.29 ou superior. [Veja aqui](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04-pt) ou [na documentação](https://docs.docker.com/compose/install/) como instalá-lo. No primeiro artigo, você pode substituir onde está com `1.26.0` por `1.29.2`.**
 
-> :information_source: Rode os serviços `node` e `db` com o comando `docker-compose up -d`.
+> :information_source: Rode os serviços `api` e `db` com o comando `docker-compose up -d`.
 
 - Lembre-se de parar o `mysql` se estiver usando localmente na porta padrão (`3306`), ou adapte, caso queria fazer uso da aplicação em containers;
 
@@ -42,6 +42,9 @@ objetivo do projeto: construir um backend completo, com teste unitarios e de int
 
   <br/>
 </details>
+
+renomeia o `.env.exemple` para `.env` e altere as variáveis para seu uso
+
 <details>
 <summary><strong>Pratica de backend, utilizando as tecnologias:</strong></summary>
 
@@ -49,5 +52,16 @@ objetivo do projeto: construir um backend completo, com teste unitarios e de int
 - Node.js
 - express
 - mySQL
-- sequelize
+- prisma
+</details>
+
+<details>
+<summary><strong>Minhas Notas</strong></summary>
+
+Para funcionar as models com prisma no docker tive que rodar o comando
+```bash
+docker system prune -af
+```
+e subir novamente o docker-compose, e altera a variável DATABASE_URL para referenciar o nome do container que está roda o banco de dados invés do host.
+
 </details>
