@@ -22,4 +22,8 @@ export default class CellController {
 
     res.status(StatusCodes.OK).json(result);
   };
+
+  update = async (req: Request, res: Response): Promise<void> => {
+    await this.cellService.update(req.body);
+  };
 }

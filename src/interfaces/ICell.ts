@@ -2,6 +2,7 @@ import { IJwtUser } from './models/user/IUser';
 
 export interface ICellBodyReq {
   cell: string
+  idCell: number
 }
 
 export interface ICellUser {

@@ -41,4 +41,12 @@ export default class JoiSchemas {
 
     user: Joi.object().optional()
   });
+
+  cellUpdateSchema = Joi.object({
+    cell: Joi.object({
+      cell: Joi.string().min(11).required(),
+      idCell: Joi.number().min(1).required()
+    }),
+    user: Joi.object().optional()
+  });
 }

@@ -65,4 +65,9 @@ export default class MiddlewareValidations {
 
     next();
   };
+
+  validateBodyCellUpdate = (req: Request, _res: Response,
+    next: NextFunction): void => {
+
+  }
 };

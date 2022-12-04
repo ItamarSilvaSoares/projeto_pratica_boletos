@@ -29,6 +29,11 @@ class CellModel implements IModelCell {
     const result = await prisma.cell.findMany({ where: { idUser } });
     return result;
   }
+
+  async findOne(cellId: number): Promise<ICellDbReturn | null> {
+    const cell = await prisma.cell.findUnique({ where: { cellId } });
+    return cell;
+  }
 }
 
 export default new CellModel();
