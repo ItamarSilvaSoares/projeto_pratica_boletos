@@ -25,5 +25,13 @@ export default class CellController {
 
   update = async (req: Request, res: Response): Promise<void> => {
     await this.cellService.update(req.body);
+
+    res.status(StatusCodes.OK).json({ message: 'complete update' });
+  };
+
+  delete = async (req: Request, res: Response): Promise<void> => {
+    await this.cellService.delete(req.body);
+
+    res.status(StatusCodes.OK).json({ message: 'complete delete' });
   };
 }

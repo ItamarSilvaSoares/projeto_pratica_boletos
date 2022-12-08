@@ -19,4 +19,10 @@ router.post('/', validate.validateBodyNewCell,
 router.get('/',
   async (req, res) => await cellController.getAllCellById(req, res));
 
+router.put('/', validate.validateBodyCellUpdate,
+  async (req, res) => await cellController.update(req, res));
+
+router.delete('/', validate.validateBodyCellDelete,
+  async (req, res) => await cellController.delete(req, res));
+
 export default router;

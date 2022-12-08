@@ -32,9 +32,9 @@ class UserModel implements IModelUser {
     return result;
   };
 
-  async login(username: string, password: string): Promise<IUser | null> {
+  async login(username: string): Promise<IUser | null> {
     const login = await prisma.user.findFirst({
-      where: { username, password }
+      where: { username }
     });
 
     return login;

@@ -6,6 +6,7 @@ import { KeyOptional, StatusCodes } from '../utils/constants';
 import { IModelUser } from '../interfaces/models/IModelUser';
 import { IServiceUser } from '../interfaces/services/IServiceUser';
 import { HttpException } from '../utils/httpException';
+import bcryptjs from '../utils/bcryptjs';
 
 export default class UserService implements IServiceUser {
   private readonly useful = new FuncUseful();
@@ -49,6 +50,10 @@ export default class UserService implements IServiceUser {
       }
     }
 
+    if (KeyOptional.Password in newData) {
+      newData.password = bcryptjs.getHash(newData.password as string);
+    }
+
     const user = await this.userModel.update(username, newData);
 
     const [newUserNoPassword] = this.useful.excludePassword([user]);
@@ -68,6 +73,8 @@ export default class UserService implements IServiceUser {
     if (user !== null) {
       throw new HttpException(StatusCodes.Conflict, 'username already exists');
     }
+
+    newUserObj.newUser.password = bcryptjs.getHash(newUserObj.newUser.password);
 
     const newObj = this.useful.configNewUserObject(newUserObj);
 

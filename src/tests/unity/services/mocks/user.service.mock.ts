@@ -186,7 +186,7 @@ export const resultExpectCreateNewUser = {
 export const calledWithFull = {
   lastname: 'test',
   name: 'test1',
-  password: '123456789',
+  password: '$2a$08$auJKZF5DVTgRZ01n0s7EAenZeJJpst9LzzAKiq9dKzYY3iNfq8nkG',
   username: 'arroz',
   cell: {
     create: {
@@ -202,7 +202,7 @@ export const calledWithFull = {
 export const calledWithEmail = {
   lastname: 'test',
   name: 'test1',
-  password: '123456789',
+  password: '$2a$08$GC6qDj.BuH.z1MEVUXI1SuGlMHEW3/0CZNHfuQX6cte1xDucGcCgG',
   username: 'arroz',
   email: {
     create: {
@@ -214,7 +214,7 @@ export const calledWithEmail = {
 export const calledWithCell = {
   lastname: 'test',
   name: 'test1',
-  password: '123456789',
+  password: '$2a$08$GC6qDj.BuH.z1MEVUXI1SuGlMHEW3/0CZNHfuQX6cte1xDucGcCgG',
   username: 'arroz',
   cell: {
     create: {
@@ -226,6 +226,14 @@ export const calledWithCell = {
 export const calledWithUser = {
   lastname: 'test',
   name: 'test1',
-  password: '123456789',
+  password: '$2a$08$GC6qDj.BuH.z1MEVUXI1SuGlMHEW3/0CZNHfuQX6cte1xDucGcCgG',
   username: 'arroz'
 };
+
+export const updateUsername = {
+  username: 'esquilo'
+}
+
+export const updatePassword = {
+  password: 'Esquilo Voador'
+}

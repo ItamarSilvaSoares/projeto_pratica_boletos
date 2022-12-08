@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -10,7 +11,7 @@ async function main(): Promise<void> {
       name: 'test',
       lastname: 'test',
       username: 'userOne',
-      password: '12345678',
+      password: '$2a$08$7qEJmJxb0aYbo2SMy1odGuhBvpBvJOVA6dR8r2ph5fYxiAPFyLeCq',
       cell: {
         create: [{
           cell: '123456789'
@@ -33,7 +34,7 @@ async function main(): Promise<void> {
       name: 'test2',
       lastname: 'test',
       username: 'userTwo',
-      password: '12345678',
+      password: '$2a$08$oOUOV04QzIEosfjHcVI6zuaaIsPQUryi9freQGGV1du1D5mcJ7v9C',
       cell: {
         create: [{
           cell: '123456789'

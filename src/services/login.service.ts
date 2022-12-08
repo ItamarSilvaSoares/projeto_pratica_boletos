@@ -4,6 +4,7 @@ import { StatusCodes } from '../utils/constants';
 import { FuncUseful } from '../utils/functions';
 import { HttpException } from '../utils/httpException';
 import { Jwt } from '../utils/jwt';
+import bcryptjs from '../utils/bcryptjs';
 
 export default class UserLogin implements IServiceLogin {
   private readonly useful = new FuncUseful();
@@ -15,9 +16,10 @@ export default class UserLogin implements IServiceLogin {
   }
 
   async login(username: string, password: string): Promise<string> {
-    const login = await this.userModel.login(username, password);
+    const login = await this.userModel.login(username);
 
-    if (login === null) {
+    if (login === null || !(bcryptjs.compareHash(password,
+      login.password as unknown as string))) {
       throw new HttpException(StatusCodes.Unauthorized,
         'Username or password invalid');
     }

@@ -68,6 +68,25 @@ export default class MiddlewareValidations {
 
   validateBodyCellUpdate = (req: Request, _res: Response,
     next: NextFunction): void => {
+    const { error } = this.schemas.cellUpdateSchema.validate(req.body);
 
-  }
+    if (error != null) {
+      throw new HttpException(StatusCodes.BadRequest,
+        error.message);
+    }
+
+    next();
+  };
+
+  validateBodyCellDelete = (req: Request, _res: Response,
+    next: NextFunction): void => {
+    const { error } = this.schemas.cellDeleteSchema.validate(req.body);
+
+    if (error != null) {
+      throw new HttpException(StatusCodes.BadRequest,
+        error.message);
+    }
+
+    next();
+  };
 };

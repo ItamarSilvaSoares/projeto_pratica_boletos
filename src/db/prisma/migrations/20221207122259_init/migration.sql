@@ -16,6 +16,7 @@ CREATE TABLE `cell_phones` (
     `id_user` INTEGER NOT NULL,
     `cell` VARCHAR(191) NOT NULL,
 
+    UNIQUE INDEX `cell_phones_cell_id_key`(`cell_id`),
     PRIMARY KEY (`cell_id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -25,6 +26,7 @@ CREATE TABLE `emails` (
     `id_user` INTEGER NOT NULL,
     `email` VARCHAR(191) NOT NULL,
 
+    UNIQUE INDEX `emails_email_id_key`(`email_id`),
     PRIMARY KEY (`email_id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -38,6 +40,7 @@ CREATE TABLE `billets` (
     `validity` DATETIME(3) NOT NULL,
     `value` DECIMAL(65, 30) NOT NULL,
 
+    UNIQUE INDEX `billets_id_line_key`(`id_line`),
     PRIMARY KEY (`billet_id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -47,6 +50,7 @@ CREATE TABLE `descriptions` (
     `description` VARCHAR(191) NOT NULL,
     `creatAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
+    UNIQUE INDEX `descriptions_description_id_key`(`description_id`),
     PRIMARY KEY (`description_id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -55,6 +59,7 @@ CREATE TABLE `status` (
     `status_id` INTEGER NOT NULL AUTO_INCREMENT,
     `status` VARCHAR(191) NOT NULL,
 
+    UNIQUE INDEX `status_status_id_key`(`status_id`),
     PRIMARY KEY (`status_id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -63,6 +68,7 @@ CREATE TABLE `scannable_lines` (
     `line_id` INTEGER NOT NULL AUTO_INCREMENT,
     `line` VARCHAR(191) NOT NULL,
 
+    UNIQUE INDEX `scannable_lines_line_id_key`(`line_id`),
     PRIMARY KEY (`line_id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

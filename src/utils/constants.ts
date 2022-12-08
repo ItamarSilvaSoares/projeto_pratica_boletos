@@ -11,5 +11,6 @@ export enum StatusCodes {
 export enum KeyOptional {
   Cell = 'cell',
   Email = 'email',
-  Username = 'username'
+  Username = 'username',
+  Password = 'password'
 }

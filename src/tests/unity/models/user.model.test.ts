@@ -16,7 +16,7 @@ describe('test the layer user model', function () {
   it('deve ser cadastrado um usuario corretamente', async function () {
     prismaMock.user.findFirst.mockResolvedValue(oneUser);
 
-    const result = await testUserModel.login('userOne', '12345678');
+    const result = await testUserModel.login('userOne');
 
     expect(result).toEqual(oneUser);
   });

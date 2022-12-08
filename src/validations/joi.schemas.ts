@@ -46,7 +46,14 @@ export default class JoiSchemas {
     cell: Joi.object({
       cell: Joi.string().min(11).required(),
       idCell: Joi.number().min(1).required()
-    }),
+    }).required(),
+    user: Joi.object().optional()
+  });
+
+  cellDeleteSchema = Joi.object({
+    cell: Joi.object({
+      idCell: Joi.number().min(1).required()
+    }).required(),
     user: Joi.object().optional()
   });
 }

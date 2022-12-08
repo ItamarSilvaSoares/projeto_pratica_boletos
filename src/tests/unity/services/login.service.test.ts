@@ -16,6 +16,7 @@ describe('test the layer login', function () {
     try {
       await mockUserLogin.login('não', 'não');
     } catch (error: any) {
+      expect.assertions(2)
       expect(error.message).toEqual('Username or password invalid');
       expect(error.status).toEqual(401);
     }
@@ -28,7 +29,8 @@ describe('test the layer login', function () {
     const token = newToken.generateToken(oneUserNoPassword);
 
     const UserToken = await mockUserLogin.login('userOne', '12345678');
-
-    expect(UserToken).toEqual(token);
+    expect.assertions(2)
+    expect(UserToken.length).toEqual(token.length);
+    expect(typeof UserToken).toEqual('string');
   });
 });

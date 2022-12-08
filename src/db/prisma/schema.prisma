@@ -25,7 +25,7 @@ model User {
 }
 
 model Cell {
-  cellId Int    @id @default(autoincrement()) @map("cell_id")
+  cellId Int    @id @unique @default(autoincrement()) @map("cell_id")
   idUser Int    @map("id_user")
   cell   String
   user   User   @relation(fields: [idUser], references: [userId], onDelete: Cascade, onUpdate: Cascade)
@@ -34,7 +34,7 @@ model Cell {
 }
 
 model Email {
-  emailId Int    @id @default(autoincrement()) @map("email_id")
+  emailId Int    @id @unique @default(autoincrement()) @map("email_id")
   idUser  Int    @map("id_user")
   email   String
   user    User   @relation(fields: [idUser], references: [userId], onDelete: Cascade, onUpdate: Cascade)
@@ -47,7 +47,7 @@ model Billet {
   idUser        Int           @map("id_user")
   idDescription Int           @map("id_description")
   idStatus      Int           @map("id_status")
-  idLine        Int           @map("id_line")
+  idLine        Int           @unique @map("id_line")
   validity      DateTime
   value         Decimal
   user          User          @relation(fields: [idUser], references: [userId], onDelete: Cascade, onUpdate: Cascade)
@@ -59,7 +59,7 @@ model Billet {
 }
 
 model Description {
-  descriptionId Int      @id @default(autoincrement()) @map("description_id")
+  descriptionId Int      @id @unique @default(autoincrement()) @map("description_id")
   description   String
   creatAt       DateTime @default(now())
   bill          Billet[]
@@ -68,7 +68,7 @@ model Description {
 }
 
 model Status {
-  statusId Int      @id @default(autoincrement()) @map("status_id")
+  statusId Int      @id @unique @default(autoincrement()) @map("status_id")
   status   String
   bill     Billet[]
 
@@ -76,7 +76,7 @@ model Status {
 }
 
 model ScannableLine {
-  lineId Int      @id @default(autoincrement()) @map("line_id")
+  lineId Int      @id @unique @default(autoincrement()) @map("line_id")
   line   String
   bill   Billet[]
 

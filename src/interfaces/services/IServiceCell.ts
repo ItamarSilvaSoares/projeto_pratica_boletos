@@ -5,4 +5,5 @@ export interface IServiceCell {
   newCell: ({ cell: { cell }, user }: ICellUser) => Promise<void>
   getAllCellByUserId: (user: IJwtUser) => Promise<ICellDbReturn[]>
   update: (objNewCell: ICellUser) => Promise<void>
+  delete: (objNewCell: ICellUser) => Promise<void>
 }

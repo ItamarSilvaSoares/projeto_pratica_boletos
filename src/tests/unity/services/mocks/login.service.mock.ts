@@ -3,7 +3,7 @@ export const oneUser = {
   name: 'test',
   lastname: 'test',
   username: 'userOne',
-  password: '12345678'
+  password: '$2a$08$7qEJmJxb0aYbo2SMy1odGuhBvpBvJOVA6dR8r2ph5fYxiAPFyLeCq'
 };
 
 export const oneUserNoPassword = {

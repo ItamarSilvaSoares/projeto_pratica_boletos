@@ -1,4 +1,3 @@
-import { ICellBodyReq } from '../../ICell';
 import { IEmail } from '../../IEmail';
 
 export interface IUser {
@@ -25,7 +24,7 @@ export interface IUserUpdate {
 
 export interface INewUserFull {
   newUser: INewUser
-  cell?: ICellBodyReq
+  cell?: { cell: string }
   email?: IEmail
 }
 
