@@ -23,9 +23,9 @@ export const userMock = {
 }
 
 export const mockCellInterface = {
-  cell: {
-    cell: '1234567891011',
-    idCell: 1,
+  data: {
+    data: '1234567891011',
+    idData: 1,
   },
   user: userMock
 }

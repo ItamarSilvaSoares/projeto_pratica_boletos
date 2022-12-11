@@ -1,15 +1,16 @@
 import {
   INewUserFull, IUser, IUserUpdate
 } from '../interfaces/models/user/IUser';
-import { FuncUseful } from '../utils/functions';
+import FuncUseful from '../utils/functions';
 import { KeyOptional, StatusCodes } from '../utils/constants';
 import { IModelUser } from '../interfaces/models/IModelUser';
 import { IServiceUser } from '../interfaces/services/IServiceUser';
 import { HttpException } from '../utils/httpException';
 import bcryptjs from '../utils/bcryptjs';
+import UserModel from '../models/User';
 
-export default class UserService implements IServiceUser {
-  private readonly useful = new FuncUseful();
+class UserService implements IServiceUser {
+  private readonly useful = FuncUseful;
   private readonly userModel: IModelUser;
 
   constructor(userModel: IModelUser) {
@@ -85,3 +86,6 @@ export default class UserService implements IServiceUser {
     return newUserNoPassword;
   }
 }
+
+export default new UserService(UserModel);
+export { UserService };

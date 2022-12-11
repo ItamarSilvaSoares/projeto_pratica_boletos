@@ -1,37 +1,14 @@
-import { Request, Response } from 'express';
+import { IService } from '../interfaces/services/IService';
+import { ICellDbReturn } from '../interfaces/ICell';
 
-import { StatusCodes } from '../utils/constants';
-import { IServiceCell } from '../interfaces/services/IServiceCell';
+import CellService from '../services/cell.service';
+import Controller from './controller';
 
-export default class CellController {
-  private readonly cellService: IServiceCell;
-
-  constructor(cellService: IServiceCell) {
-    this.cellService = cellService;
+class CellController extends Controller<ICellDbReturn> {
+  constructor(cellService: IService<ICellDbReturn>) {
+    super(cellService, 'cell');
   }
-
-  newCell = async (req: Request, res: Response): Promise<void> => {
-    await this.cellService.newCell(req.body);
-
-    res.status(StatusCodes.Create)
-      .json({ message: 'new cell add with success' });
-  };
-
-  getAllCellById = async (req: Request, res: Response): Promise<void> => {
-    const result = await this.cellService.getAllCellByUserId(req.body.user);
-
-    res.status(StatusCodes.OK).json(result);
-  };
-
-  update = async (req: Request, res: Response): Promise<void> => {
-    await this.cellService.update(req.body);
-
-    res.status(StatusCodes.OK).json({ message: 'complete update' });
-  };
-
-  delete = async (req: Request, res: Response): Promise<void> => {
-    await this.cellService.delete(req.body);
-
-    res.status(StatusCodes.OK).json({ message: 'complete delete' });
-  };
 }
+
+export default new CellController(CellService);
+export { CellController };

@@ -2,8 +2,9 @@ import { Request, Response } from 'express';
 import { IServiceUser } from '../interfaces/services/IServiceUser';
 
 import { StatusCodes } from '../utils/constants';
+import UserService from '../services/user.service';
 
-export default class UserController {
+class UserController {
   private readonly userService: IServiceUser;
 
   constructor(userService: IServiceUser) {
@@ -52,3 +53,6 @@ export default class UserController {
     res.status(StatusCodes.OK).json(result);
   };
 }
+
+export default new UserController(UserService);
+export { UserController };

@@ -1,7 +1,7 @@
 import { createRequest, createResponse } from 'node-mocks-http';
 
-import UserLogin from '../../../services/login.service';
-import UserLoginController from '../../../controllers/login.controller';
+import { UserLogin } from '../../../services/login.service';
+import { UserLoginController } from '../../../controllers/login.controller';
 import UserModel from '../../../models/User';
 
 import { token } from './mocks/login.controller.mock';

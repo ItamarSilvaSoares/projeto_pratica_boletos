@@ -1,8 +1,11 @@
+import { IUser, IUserUpdate } from './user/IUser';
 
-import { IModelDelete } from './user/IModelDelete';
-import { IModelLogin } from './user/IModelLogin';
-import { IModelRead } from './user/IModelRead';
-import { IModelWrite } from './user/IModelWrite';
-
-export interface IModelUser extends IModelDelete, IModelLogin,
-  IModelRead, IModelWrite { }
+export interface IModelUser {
+  delete: (username: string) => Promise<void>
+  login: (username: string) => Promise<IUser | null>
+  findOne: (username: string) => Promise<IUser | null>
+  find: () => Promise<IUser[]>
+  search: (toSearch: string) => Promise<IUser[]>
+  create: (newUserObj: any) => Promise<IUser>
+  update: (username: string, newData: IUserUpdate) => Promise<IUser>
+}

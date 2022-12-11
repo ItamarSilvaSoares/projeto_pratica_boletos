@@ -3,7 +3,9 @@ import { IServiceLogin } from '../interfaces/services/IServiceLogin';
 
 import { StatusCodes } from '../utils/constants';
 
-export default class UserLoginController {
+import UserLogin from '../services/login.service';
+
+class UserLoginController {
   private readonly loginService: IServiceLogin;
 
   constructor(loginService: IServiceLogin) {
@@ -17,3 +19,6 @@ export default class UserLoginController {
     res.status(StatusCodes.OK).json({ token });
   };
 }
+
+export default new UserLoginController(UserLogin);
+export { UserLoginController };

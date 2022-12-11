@@ -1,8 +1,8 @@
 import { ICellDbReturn } from '../interfaces/ICell';
-import { IModelCell } from '../interfaces/models/cell/IModelCell';
+import { IModel } from '../interfaces/models/IModel';
 import prisma from './client';
 
-class CellModel implements IModelCell {
+class CellModel implements IModel<ICellDbReturn> {
   async update(cellId: number, cell: string): Promise<ICellDbReturn> {
     const result = await prisma.cell.update({
       where: { cellId }, data: { cell }

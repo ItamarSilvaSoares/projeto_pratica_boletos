@@ -31,6 +31,14 @@ export default class JoiSchemas {
     user: Joi.object().optional()
   });
 
+  newEmailSchema = Joi.object({
+    email: Joi.object({
+      email: Joi.string().email().required()
+    }).required(),
+
+    user: Joi.object().optional()
+  });
+
   userUpdateSchema = Joi.object({
     userUpdate: Joi.object({
       name: Joi.string().min(5).optional(),
@@ -50,9 +58,24 @@ export default class JoiSchemas {
     user: Joi.object().optional()
   });
 
+  emailUpdateSchema = Joi.object({
+    email: Joi.object({
+      email: Joi.string().email().required(),
+      idEmail: Joi.number().min(1).required()
+    }).required(),
+    user: Joi.object().optional()
+  });
+
   cellDeleteSchema = Joi.object({
     cell: Joi.object({
       idCell: Joi.number().min(1).required()
+    }).required(),
+    user: Joi.object().optional()
+  });
+
+  emailDeleteSchema = Joi.object({
+    email: Joi.object({
+      idEmail: Joi.number().min(1).required()
     }).required(),
     user: Joi.object().optional()
   });

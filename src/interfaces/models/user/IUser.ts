@@ -1,5 +1,3 @@
-import { IEmail } from '../../IEmail';
-
 export interface IUser {
   user_id?: number
   name: string
@@ -25,7 +23,7 @@ export interface IUserUpdate {
 export interface INewUserFull {
   newUser: INewUser
   cell?: { cell: string }
-  email?: IEmail
+  email?: { email: string }
 }
 
 export interface IJwtUser {

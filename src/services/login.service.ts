@@ -1,13 +1,15 @@
 import { IModelUser } from '../interfaces/models/IModelUser';
 import { IServiceLogin } from '../interfaces/services/IServiceLogin';
 import { StatusCodes } from '../utils/constants';
-import { FuncUseful } from '../utils/functions';
+import FuncUseful from '../utils/functions';
 import { HttpException } from '../utils/httpException';
 import { Jwt } from '../utils/jwt';
 import bcryptjs from '../utils/bcryptjs';
 
-export default class UserLogin implements IServiceLogin {
-  private readonly useful = new FuncUseful();
+import UserModel from '../models/User';
+
+class UserLogin implements IServiceLogin {
+  private readonly useful = FuncUseful;
   private readonly jwt = new Jwt();
   private readonly userModel: IModelUser;
 
@@ -29,3 +31,6 @@ export default class UserLogin implements IServiceLogin {
     return this.jwt.generateToken(withoutPassword);
   };
 }
+
+export default new UserLogin(UserModel);
+export { UserLogin };

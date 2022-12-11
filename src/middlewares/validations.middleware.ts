@@ -5,7 +5,7 @@ import { Jwt } from '../utils/jwt';
 
 import JoiSchemas from '../validations/joi.schemas';
 
-export default class MiddlewareValidations {
+class MiddlewareValidations {
   private readonly schemas = new JoiSchemas();
 
   validateBodyLogin = (req: Request, _res: Response,
@@ -44,6 +44,18 @@ export default class MiddlewareValidations {
     next();
   };
 
+  validateBodyNewEmail = (req: Request, _res: Response,
+    next: NextFunction): void => {
+    const { error } = this.schemas.newEmailSchema.validate(req.body);
+
+    if (error != null) {
+      throw new HttpException(StatusCodes.BadRequest,
+        error.message);
+    }
+
+    next();
+  };
+
   tokenValidate = (req: Request, _res: Response, next: NextFunction): void => {
     const jwt = new Jwt();
 
@@ -57,6 +69,18 @@ export default class MiddlewareValidations {
   validateBodyUserUpdate = (req: Request, _res: Response,
     next: NextFunction): void => {
     const { error } = this.schemas.userUpdateSchema.validate(req.body);
+
+    if (error != null) {
+      throw new HttpException(StatusCodes.BadRequest,
+        error.message);
+    }
+
+    next();
+  };
+
+  validateBodyEmailUpdate = (req: Request, _res: Response,
+    next: NextFunction): void => {
+    const { error } = this.schemas.emailUpdateSchema.validate(req.body);
 
     if (error != null) {
       throw new HttpException(StatusCodes.BadRequest,
@@ -89,4 +113,18 @@ export default class MiddlewareValidations {
 
     next();
   };
+
+  validateBodyEmailDelete = (req: Request, _res: Response,
+    next: NextFunction): void => {
+    const { error } = this.schemas.emailDeleteSchema.validate(req.body);
+
+    if (error != null) {
+      throw new HttpException(StatusCodes.BadRequest,
+        error.message);
+    }
+
+    next();
+  };
 };
+
+export default new MiddlewareValidations();

@@ -3,21 +3,18 @@ import express from 'express';
 import CellController from '../controllers/cell.controller';
 import MiddlewareValidations from '../middlewares/validations.middleware';
 
-import CellService from '../services/cell.service';
-import CellModel from '../models/Cell';
-
-const cellController = new CellController(new CellService(CellModel));
-const validate = new MiddlewareValidations();
+const cellController = CellController;
+const validate = MiddlewareValidations;
 
 const router = express.Router();
 
 router.use(validate.tokenValidate);
 
 router.post('/', validate.validateBodyNewCell,
-  async (req, res) => await cellController.newCell(req, res));
+  async (req, res) => await cellController.create(req, res));
 
 router.get('/',
-  async (req, res) => await cellController.getAllCellById(req, res));
+  async (req, res) => await cellController.find(req, res));
 
 router.put('/', validate.validateBodyCellUpdate,
   async (req, res) => await cellController.update(req, res));

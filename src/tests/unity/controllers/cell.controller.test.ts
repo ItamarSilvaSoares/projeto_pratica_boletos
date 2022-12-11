@@ -1,9 +1,10 @@
 import { createRequest, createResponse } from 'node-mocks-http';
-import CellService from "../../../services/cell.service";
+import { CellService } from "../../../services/cell.service";
 import CellModel from '../../../models/Cell';
-import CellController from '../../../controllers/cell.controller';
+import { CellController } from '../../../controllers/cell.controller';
 
 import { allCellReturnDb } from '../services/mocks/cell.service.mock';
+import { bodyReq } from './mocks/cell.controller.mock';
 
 const mockCellController = new CellController(new CellService(CellModel))
 
@@ -13,11 +14,11 @@ describe('test the layer cell controller', function () {
   });
 
   it('deve retornar o status 201 quando se cria um novo cell', async function () {
-    jest.spyOn(CellService.prototype, 'newCell').mockResolvedValue();
-    const req = createRequest({ method: 'POST', url: '/user/cell' });
+    jest.spyOn(CellService.prototype, 'create').mockResolvedValue();
+    const req = createRequest({ method: 'POST', url: '/user/cell', body: bodyReq });
     const res = createResponse();
 
-    await mockCellController.newCell(req, res);
+    await mockCellController.create(req, res);
 
     const data = res._getJSONData();
 
@@ -27,11 +28,11 @@ describe('test the layer cell controller', function () {
   });
 
   it('deve retornar o status 200 e todos os cell do usuario', async function () {
-    jest.spyOn(CellService.prototype, 'getAllCellByUserId').mockResolvedValue(allCellReturnDb);
+    jest.spyOn(CellService.prototype, 'find').mockResolvedValue(allCellReturnDb);
     const req = createRequest({ method: 'GET', url: '/user/cell' });
     const res = createResponse();
 
-    await mockCellController.getAllCellById(req, res);
+    await mockCellController.find(req, res);
 
     const data = res._getJSONData();
 
@@ -42,7 +43,7 @@ describe('test the layer cell controller', function () {
 
   it('deve retornar o status 200 quando se atualiza um cell', async function () {
     jest.spyOn(CellService.prototype, 'update').mockResolvedValue();
-    const req = createRequest({ method: 'PUT', url: '/user/cell' });
+    const req = createRequest({ method: 'PUT', url: '/user/cell', body: bodyReq });
     const res = createResponse();
 
     await mockCellController.update(req, res);
@@ -51,12 +52,12 @@ describe('test the layer cell controller', function () {
 
     expect.assertions(2);
     expect(res.statusCode).toEqual(200);
-    expect(data).toEqual({ "message": "complete update" });
+    expect(data).toEqual({ "message": "cell update with success" });
   });
 
   it('deve retornar o status 200 quando se deleta um cell', async function () {
     jest.spyOn(CellService.prototype, 'delete').mockResolvedValue();
-    const req = createRequest({ method: 'DELETE', url: '/user/cell' });
+    const req = createRequest({ method: 'DELETE', url: '/user/cell', body: bodyReq });
     const res = createResponse();
 
     await mockCellController.delete(req, res);
@@ -65,6 +66,6 @@ describe('test the layer cell controller', function () {
 
     expect.assertions(2);
     expect(res.statusCode).toEqual(200);
-    expect(data).toEqual({ "message": "complete delete" });
+    expect(data).toEqual({ "message": "cell delete with success" });
   });
 })

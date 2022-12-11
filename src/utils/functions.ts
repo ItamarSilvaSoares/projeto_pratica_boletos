@@ -1,17 +1,31 @@
 import { Prisma } from '@prisma/client';
 
 import dotenv from 'dotenv';
+import { ICellUser } from '../interfaces/ICell';
+import { IDataUser } from '../interfaces/IData';
+import { IEmailUser } from '../interfaces/IEmail';
 
 import { INewUserFull, IUser } from '../interfaces/models/user/IUser';
 import { KeyOptional } from './constants';
 
 dotenv.config();
 
-export class FuncUseful {
+class FuncUseful {
   excludePassword(users: IUser[]): IUser[] {
     users.forEach(user => delete user.password);
 
     return users;
+  }
+
+  changeKeyName(obj: ICellUser | IEmailUser): IDataUser {
+    if (KeyOptional.Cell in obj) {
+      const data = { data: obj.cell.cell, idData: obj.cell.idCell };
+      const newObj = { data, user: obj.user };
+      return newObj;
+    }
+    const data = { data: obj.email.email, idData: obj.email.idEmail };
+    const newObj = { data, user: obj.user };
+    return newObj;
   }
 
   configNewUserObject(newUserObj: INewUserFull): Prisma.UserCreateInput {
@@ -37,3 +51,5 @@ export class FuncUseful {
     return newUserObj.newUser;
   }
 }
+
+export default new FuncUseful();

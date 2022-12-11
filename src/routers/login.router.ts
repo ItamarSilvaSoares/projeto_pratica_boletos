@@ -2,12 +2,10 @@ import express from 'express';
 
 import UserLoginController from '../controllers/login.controller';
 import MiddlewareValidations from '../middlewares/validations.middleware';
-import UserLogin from '../services/login.service';
-import UserModel from '../models/User';
 
-const login = new UserLoginController(new UserLogin(UserModel));
+const login = UserLoginController;
 
-const validations = new MiddlewareValidations();
+const validations = MiddlewareValidations;
 
 const router = express.Router();
 

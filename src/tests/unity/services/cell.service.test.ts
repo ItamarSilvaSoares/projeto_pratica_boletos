@@ -1,10 +1,10 @@
 import { prismaMock } from '../models/mocks/singleton';
-import CellService from '../../../services/cell.service';
+import { CellService } from '../../../services/cell.service';
 import CellModel from '../../../models/Cell';
 
 import { allCellReturnDb, cellReturnDb, findOneMock, findOneMockOther, mockCellInterface, userMock } from './mocks/cell.service.mock'
 
-describe('test do service Cell', () => {
+describe('teste do service Cell', () => {
   const mockCellService = new CellService(CellModel)
   afterEach(() => {
     jest.clearAllMocks();
@@ -63,7 +63,7 @@ describe('test do service Cell', () => {
   it('deve executar a função newCell corretamente', async function () {
     prismaMock.cell.create.mockResolvedValue(cellReturnDb);
 
-    await mockCellService.newCell(mockCellInterface);
+    await mockCellService.create(mockCellInterface);
 
     expect.assertions(2);
     expect(prismaMock.cell.create).toBeCalled()
@@ -73,7 +73,7 @@ describe('test do service Cell', () => {
   it('deve retornar todos os cell do usuario', async function () {
     prismaMock.cell.findMany.mockResolvedValue(allCellReturnDb);
 
-    const result = await mockCellService.getAllCellByUserId(userMock);
+    const result = await mockCellService.find(userMock);
 
     expect.assertions(2);
     expect(result).toEqual(allCellReturnDb);

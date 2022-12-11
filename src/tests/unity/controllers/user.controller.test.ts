@@ -1,5 +1,5 @@
-import UserService from '../../../services/user.service';
-import UserController from '../../../controllers/user.controller';
+import { UserService } from '../../../services/user.service';
+import { UserController } from '../../../controllers/user.controller';
 import { createRequest, createResponse } from 'node-mocks-http';
 import UserModel from '../../../models/User';
 
