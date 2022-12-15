@@ -49,7 +49,7 @@ model Billet {
   idStatus      Int           @map("id_status")
   idLine        Int           @unique @map("id_line")
   validity      DateTime
-  value         Decimal
+  value         Float
   user          User          @relation(fields: [idUser], references: [userId], onDelete: Cascade, onUpdate: Cascade)
   desc          Description   @relation(fields: [idDescription], references: [descriptionId], onDelete: Cascade, onUpdate: Cascade)
   status        Status        @relation(fields: [idStatus], references: [statusId], onDelete: Cascade, onUpdate: Cascade)

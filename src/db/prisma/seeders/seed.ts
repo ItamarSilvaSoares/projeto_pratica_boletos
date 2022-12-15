@@ -27,32 +27,18 @@ async function main(): Promise<void> {
     }
   });
 
-  const userTwo = await prisma.user.upsert({
-    where: { userId: 0 },
-    update: {},
-    create: {
-      name: 'test2',
-      lastname: 'test',
-      username: 'userTwo',
-      password: '$2a$08$oOUOV04QzIEosfjHcVI6zuaaIsPQUryi9freQGGV1du1D5mcJ7v9C',
-      cell: {
-        create: [{
-          cell: '123456789'
-        }, {
-          cell: '987654321'
-        }]
-      },
-      email: {
-        create: [{
-          email: 'userTwo@test.com'
-        }, {
-          email: 'twoUser@test.com'
-        }]
-      }
-    }
-  });
+  await prisma.$transaction([
+    prisma.status.createMany({
+      data: [
+        { status: 'Pago' },
+        { status: 'Vencido' },
+        { status: 'Em aberto' }
+      ],
+      skipDuplicates: true
+    })
+  ]);
 
-  console.log({ userOne, userTwo });
+  console.log({ userOne });
 }
 
 main()
