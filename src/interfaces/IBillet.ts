@@ -9,7 +9,7 @@ export interface IBilletBodyReq {
 }
 
 export interface IBilletUser {
-  cell: IBilletBodyReq
+  billet: IBilletBodyReq
   user: IJwtUser
 }
 

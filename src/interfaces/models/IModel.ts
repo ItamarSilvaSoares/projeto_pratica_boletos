@@ -6,3 +6,6 @@ export interface IModel<t> {
   create: (data: string, idUser: number) => Promise<void>
   update: (dataId: number, data: string) => Promise<t>
 }
+
+export type bdTable = 'cell' | 'billet' | 'email'
+| 'description' | 'scannableLine' | 'status' | 'user'

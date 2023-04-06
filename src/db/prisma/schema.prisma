@@ -61,7 +61,7 @@ model Billet {
 model Description {
   descriptionId Int      @id @unique @default(autoincrement()) @map("description_id")
   description   String
-  creatAt       DateTime @default(now())
+  createdAt     DateTime @default(now())
   bill          Billet[]
 
   @@map("descriptions")
